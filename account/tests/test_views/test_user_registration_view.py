@@ -1,12 +1,11 @@
 from django.urls import reverse
-from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework.test import APITestCase
 
 from account.models import User
 
 
 class UserRegistrationViewTests(APITestCase):
-
     fixtures = ['account/test_users.yaml']
 
     def setUp(self):
@@ -37,10 +36,6 @@ class UserRegistrationViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_user_registration_duplicated(self):
-        data = {
-            'username': 'arian',
-            'email': 'arian@gmail.com',
-            'password': "hello"
-        }
+        data = {'username': 'arian', 'email': 'arian@gmail.com', 'password': "hello"}
         response = self.client.post(self.url, data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
