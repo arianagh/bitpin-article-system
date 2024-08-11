@@ -3,6 +3,7 @@
 import os
 from datetime import timedelta
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -123,7 +124,7 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.AnonRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'user': '1000/day',
+        'user': '200/day',
         'anon': '100/hour',
     },
 }
@@ -222,4 +223,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_REQUESTS_TIMEOUT = 10
 
 IS_PRODUCTION = False
-

@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 
 from article.models import Article, Score
 from article.serializers.score_serializer import ScoreSerializer
+from utilities import cache_helper
 
 
 class ScoreCreateView(APIView):
@@ -19,6 +20,8 @@ class ScoreCreateView(APIView):
         serializer.is_valid(raise_exception=True)
         _, created = Score.objects.update_or_create(
             article=article, user=user, defaults={'value': serializer.validated_data['value']})
+
+        cache_helper.add_article_id_to_cache(article_id)
 
         return Response(serializer.data,
                         status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
