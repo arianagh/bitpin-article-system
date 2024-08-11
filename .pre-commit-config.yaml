@@ -1,19 +1,27 @@
 # Use `pre-commit autoupdate` to update this
 
 repos:
-- repo: https://github.com/pycqa/flake8
-  rev: 7.0.0
-  hooks:
-    - id: flake8
-      args: ["--config", "setup.cfg"]
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        args: [ "--config", "setup.cfg" ]
 
-- repo: https://github.com/google/yapf
-  rev: v0.40.2
-  hooks:
-    - id: yapf
-      args: ["-irp", "--style", "setup.cfg"]
+  - repo: https://github.com/google/yapf
+    rev: v0.40.2
+    hooks:
+      - id: yapf
+        args: [ "-irp", "--style", "setup.cfg" ]
 
-- repo: https://github.com/pycqa/isort
-  rev: 5.13.2
-  hooks:
-    - id: isort
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+
+  - repo: local
+    hooks:
+      - id: check-missing-migrations
+        name: Check for Missing MakeMigrations
+        entry: bash scripts/check_missing_migrations.sh
+        language: system
+        types: [ python ]
