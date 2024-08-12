@@ -26,13 +26,13 @@ class Article(BaseModel):
         updated_articles = []
 
         for article in articles:
-            article.average_rating = article.avg_rate
+            article.average_rating = article.avg_rating
             article.ratings_count = article.rate_count
             article.updated_at = timezone.now()
             updated_articles.append(article)
 
         cls.objects.bulk_update(updated_articles,
-                                ['average_rating', 'ratings_count', 'updated_at'])
+                                ['average_rating', 'ratings_count', 'updated_at'], batch_size=750)
 
     @classmethod
     def bulk_update_stale_articles(cls):

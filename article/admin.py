@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from article.models import Article
+from article.models import Article, Score
 from utilities.admin.commons import CommonModelAdmin
 
 
@@ -9,4 +9,9 @@ class ArticleAdmin(CommonModelAdmin):
     fields = ('title', 'content')
 
 
+class ScoreAdmin(CommonModelAdmin):
+    list_display = ('article', 'user', 'value')
+
+
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(Score, ScoreAdmin)

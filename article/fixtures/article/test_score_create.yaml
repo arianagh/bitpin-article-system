@@ -1,0 +1,27 @@
+- model: account.user
+  pk: 1
+  fields:
+    password: pbkdf2_sha256$600000$79IiG9Bpvi4G2M24SNAw8J$OKVAl0cWYICYsd7fXiyRKS5TKZ8M+J9Or6Yd9KmPzEs=
+    username: testuser
+    email: ali@gmail.com
+    is_staff: true
+    is_active: true
+    created_at: 2024-01-10T13:00:00+0330
+    updated_at: 2024-01-10T13:00:00+0330
+
+- model: article.article
+  pk: 1
+  fields:
+    title: "Test Article"
+    content: "Some content"
+    created_at: 2024-01-10T13:00:00+0330
+    updated_at: 2024-01-10T13:00:00+0330
+
+- model: article.score
+  pk: 1
+  fields:
+    article: 1
+    user: 1
+    value: 3
+    created_at: 2024-01-10T13:00:00+0330
+    updated_at: 2024-01-10T13:00:00+0330
