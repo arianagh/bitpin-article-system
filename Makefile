@@ -20,7 +20,7 @@ beat:
 	celery -A core.celery beat -l info
 
 
-worker:
+celery:
 	celery -A core.celery worker -l info
 
 

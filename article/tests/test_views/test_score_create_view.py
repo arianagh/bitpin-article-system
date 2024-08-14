@@ -27,6 +27,7 @@ class ScoreCreateViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Score.objects.count(), 2)
         self.assertEqual(Score.objects.last().value, 4)
+        self.assertEqual(Score.objects.last().weight, 0.5)
         mock_cache.assert_called_once_with(self.article.id)
 
     def test_update_score(self):
@@ -39,6 +40,7 @@ class ScoreCreateViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Score.objects.count(), 1)
         self.assertEqual(Score.objects.first().value, 5)
+        self.assertEqual(Score.objects.first().weight, 0.5)
         mock_cache.assert_called_once_with(self.article.id)
 
     def test_invalid_score(self):

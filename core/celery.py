@@ -26,6 +26,14 @@ tasks = {
         'task': 'article.tasks.update_stale_articles',
         'schedule': crontab(hour='23', minute='59'),
     },
+    'celery_find_suspicious_ratings': {
+        'task': 'article.tasks.find_suspicious_ratings',
+        'schedule': mins_to_seconds(20),
+    },
+    'celery_flag_suspicious_articles': {
+        'task': 'article.tasks.flag_suspicious_articles',
+        'schedule': mins_to_seconds(60),
+    },
 }
 
 app.conf.beat_schedule = tasks

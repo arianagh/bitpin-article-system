@@ -2,6 +2,7 @@ import logging
 
 from celery import shared_task
 
+from article.helpers import ArticleRatingsAnalyzer
 from article.models import Article
 from utilities import cache_helper
 
@@ -21,3 +22,18 @@ def update_stale_articles():
     logging.info('Updating the stale articles')
 
     Article.bulk_update_stale_articles()
+
+
+@shared_task
+def flag_suspicious_articles():
+    logging.info('Updating the articles which have suspicious ratings')
+
+    Article.bulk_flag_suspicious_articles()
+
+
+@shared_task
+def find_suspicious_ratings():
+    logging.info('Find the ratings which are suspicious')
+
+    analyzer = ArticleRatingsAnalyzer()
+    analyzer.analyze()

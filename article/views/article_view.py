@@ -19,7 +19,7 @@ class ArticleListView(APIView):
 
     def get(self, request):
         user = self.request.user
-        queryset = Article.objects.with_user_score(user.id).latest()
+        queryset = Article.objects.with_user_score(user.id).latest_by_time()
         paginator = self.pagination_class()
         paginated_queryset = paginator.paginate_queryset(queryset, request)
 
