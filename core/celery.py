@@ -20,7 +20,7 @@ def mins_to_seconds(mins):
 tasks = {
     'celery_batch_update_article_ratings': {
         'task': 'article.tasks.batch_update_article_ratings',
-        'schedule': mins_to_seconds(5),
+        'schedule': mins_to_seconds(1),
     },
     'celery_update_stale_articles': {
         'task': 'article.tasks.update_stale_articles',

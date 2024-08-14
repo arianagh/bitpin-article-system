@@ -62,18 +62,18 @@ class ArticleRatingsAnalyzer:
         if mode_count > len(scores) * self.HIGH_CONCENTRATION_THRESHOLD:
             is_suspicious = True
             reason_of_suspicion = (f"High concentration of identical scores: {mode_count} out of"
-                                   f" {len(scores)} scores are {mode_score}. ")
+                                   f" {len(scores)} scores are {mode_score}. --- ")
             suspicious_score_ids = group[group['value'] == mode_score]['id']
 
         elif count_scores > self.config.spike_threshold:
             if weighted_std_dev < self.config.min_score_deviation:
                 is_suspicious = True
-                reason_of_suspicion += f"Low standard deviation detected: {weighted_std_dev}. "
+                reason_of_suspicion += f"Low standard deviation detected: {weighted_std_dev}. --- "
 
             if mean_scores < last_24_hours_mean:
                 is_suspicious = True
                 reason_of_suspicion += (f"Mean score lower than 24-hour average: "
-                                        f"{mean_scores} < {last_24_hours_mean}. ")
+                                        f"{mean_scores} < {last_24_hours_mean}. --- ")
 
             outlier_scores = group[~group['value'].isin([
                 score for score in scores
