@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 import numpy as np
+from auditlog.registry import auditlog
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -105,3 +106,7 @@ class FraudDetectionConfig(models.Model):
         default=10, help_text="Time window in minutes to analyze for spikes.")
     min_score_deviation = models.FloatField(
         default=1.0, help_text="Minimum standard deviation of scores to avoid flagging.")
+
+
+auditlog.register(Score)
+auditlog.register(FraudDetectionConfig)

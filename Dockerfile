@@ -11,4 +11,5 @@ RUN pip install -r requirements.txt
 
 EXPOSE 8000
 
-CMD ["gunicorn", "--bind", "--reload", "0.0.0.0:8000", "core.wsgi:application"]
+CMD ["gunicorn", "--reload", "--workers", "3", "--bind", "0.0.0.0:8000",
+ "--env", "DJANGO_SETTINGS_MODULE=core.settings.development", "core.wsgi:application"]

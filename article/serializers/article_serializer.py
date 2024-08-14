@@ -15,4 +15,4 @@ class ArticleReadSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = ['title', 'content', 'average_rating', 'ratings_count', 'my_score']
+        fields = ['id', 'title', 'content', 'average_rating', 'ratings_count', 'my_score']

@@ -44,10 +44,10 @@ class FraudDetectionTestCase(TestCase):
                                 expected_suspicious_ids=expected_suspicious_ids)
 
     def test_spike_detection_most_common(self):
-        scores = [1, 1, 1, 3, 1, 1, 4]
+        scores = [1, 1, 1, 3, 1, 1, 4, 1, 1, 1]
         created_scores = self.create_scores(scores)
-        expected_suspicious_ids = [created_scores[i].id for i in [0, 1, 2, 4, 5]]
-        self.analyze_and_assert(expected_suspicious_count=5,
+        expected_suspicious_ids = [created_scores[i].id for i in [0, 1, 2, 4, 5, 7, 8, 9]]
+        self.analyze_and_assert(expected_suspicious_count=8,
                                 expected_suspicious_ids=expected_suspicious_ids)
 
     def test_low_standard_deviation_detection(self):

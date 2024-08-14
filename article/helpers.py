@@ -9,7 +9,7 @@ from .models import FraudDetectionConfig, Score
 
 
 class ArticleRatingsAnalyzer:
-    HIGH_CONCENTRATION_THRESHOLD = 0.7
+    HIGH_CONCENTRATION_THRESHOLD = 0.8
 
     def __init__(self):
         self.config = FraudDetectionConfig.objects.first()
@@ -35,7 +35,8 @@ class ArticleRatingsAnalyzer:
         recent_scores = self._get_recent_scores()
         data = pd.DataFrame(
             list(recent_scores.values('id', 'article_id', 'value', 'weight', 'created_at')))
-        return data.groupby('article_id')
+        if not data.empty:
+            return data.groupby('article_id')
 
     def _get_last_24_hours_mean_per_article(self):
         last_24_hours_scores = Score.objects.filter(created_at__gte=self.day_ago,
@@ -59,7 +60,7 @@ class ArticleRatingsAnalyzer:
 
         last_24_hours_mean = last_24_hours_mean_per_article.get(article_id, 0)
 
-        if mode_count > len(scores) * self.HIGH_CONCENTRATION_THRESHOLD:
+        if mode_count >= len(scores) * self.HIGH_CONCENTRATION_THRESHOLD:
             is_suspicious = True
             reason_of_suspicion = (f"High concentration of identical scores: {mode_count} out of"
                                    f" {len(scores)} scores are {mode_score}. --- ")

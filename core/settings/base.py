@@ -32,6 +32,7 @@ THIRD_PARTY_APPS = [
     'django_celery_beat',
     'django_celery_results',
     'django_extensions',
+    'auditlog',
 ]
 
 INSTALLED_APPS = [
@@ -58,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'auditlog.middleware.AuditlogMiddleware',
 ]
 
 # Password validation
@@ -124,8 +127,8 @@ REST_FRAMEWORK = {
         'rest_framework.throttling.AnonRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'user': '20000/day',  # todo
-        'anon': '10000/hour',
+        'user': '300/hour',
+        'anon': '150/hour',
         'score': '3000/minute',
     },
 }
@@ -224,3 +227,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_REQUESTS_TIMEOUT = 10
 
 IS_PRODUCTION = False
+
+AUDITLOG_INCLUDE_ALL_MODELS = False

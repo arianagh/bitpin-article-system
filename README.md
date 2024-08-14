@@ -57,6 +57,7 @@ REST Framework (DRF) to provide a robust API for interaction.
 - Makefile (You can use it for easier running the commands)
 
 ## Setup Instructions
+- First of all make sure you have redis running with a docker container or locally installed redis.
 
 1. **Clone the Repository**:
    ```bash
